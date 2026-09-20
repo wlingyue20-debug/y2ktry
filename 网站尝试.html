@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人作品</title>
+    <style>
+        /* 基础样式和主题变量 */
+        :root {
+            --bg-color: #f4f4f9;
+            --text-color: #333;
+            --card-bg: #fff;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --primary: #4a90e2;
+            --border: #ddd;
+        }
+
+        body.dark-mode {
+            --bg-color: #1a1a1a;
+            --text-color: #f4f4f9;
+            --card-bg: #2d2d2d;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+            --border: #444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        header {
+            max-width: 900px;
+            margin: 0 auto 30px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+        }
+
+        /* 按钮通用样式 */
+        button {
+            cursor: pointer;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: opacity 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        /* 作品卡片区域 */
+        .grid-container {
+            max-width: 900px;
+            margin: 0 auto 40px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background-color: #ccc;
+        }
+
+        .card-content {
+            padding: 15px;
+        }
+
+        .card-content h3 {
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+
+        .card-content p {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* 待办清单区域 */
+        .todo-section {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .todo-section h2 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .todo-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .todo-input-group input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--bg-color);
+            color: var(--text-color);
+            outline: none;
+        }
+
+        .todo-input-group input:focus {
+            border-color: var(--primary);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+
+        .delete-btn {
+            background: #e74c3c;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>我的个人作品</h1>
+        <button id="theme-toggle">🌙 切换暗色</button>
+    </header>
+
+    <!-- 作品展示区域 -->
+    <div class="grid-container">
+        <div class="card">
+            <img src="https://picsum.photos/400/200?random=1" alt="作品1">
+            <div class="card-content">
+                <h3>作品一：个人博客</h3>
+                <p>一个使用纯静态技术搭建的极简风格博客，记录我的学习笔记。</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="https://picsum.photos/400/200?random=2" alt="作品2">
+            <div class="card-content">
+                <h3>作品二：天气小工具</h3>
+                <p>调用公开 API 获取实时天气，支持搜索不同城市。</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="https://picsum.photos/400/200?random=3" alt="作品3">
+            <div class="card-content">
+                <h3>作品三：贪吃蛇游戏</h3>
+                <p>用 Canvas 实现的经典小游戏，适配键盘和手机触屏。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 待办清单区域 -->
+    <div class="todo-section">
+        <h2>📝 我的待办清单</h2>
+        <div class="todo-input-group">
+            <input type="text" id="todo-input" placeholder="输入新的待办事项...">
+            <button id="add-btn">添加</button>
+        </div>
+        <ul id="todo-list">
+            <!-- 待办事项会通过 JS 动态插入到这里 -->
+        </ul>
+    </div>
+
+    <script>
+        // 1. 暗色模式切换逻辑
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // 检查本地存储中是否有主题设置
+        if (localStorage.getItem('theme') === 'dark') {
+            body.classList.add('dark-mode');
+            themeToggle.textContent = '☀️ 切换亮色';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeToggle.textContent = '☀️ 切换亮色';
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = '🌙 切换暗色';
+            }
+        });
+
+        // 2. 待办清单逻辑
+        const todoInput = document.getElementById('todo-input');
+        const addBtn = document.getElementById('add-btn');
+        const todoList = document.getElementById('todo-list');
+
+        // 从本地存储获取待办事项，如果没有则初始化为空数组
+        let todos = JSON.parse(localStorage.getItem('myTodos')) || [
+            { id: 1, text: '完成个人作品网站 demo' },
+            { id: 2, text: '把代码上传到 GitHub' }
+        ];
+
+        // 渲染待办列表
+        function renderTodos() {
+            todoList.innerHTML = '';
+            todos.forEach(todo => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span>${todo.text}</span>
+                    <button class="delete-btn" onclick="deleteTodo(${todo.id})">删除</button>
+                `;
+                todoList.appendChild(li);
+            });
+            // 保存到本地存储
+            localStorage.setItem('myTodos', JSON.stringify(todos));
+        }
+
+        // 添加待办
+        function addTodo() {
+            const text = todoInput.value.trim();
+            if (text === '') return;
+
+            const newTodo = {
+                id: Date.now(), // 使用时间戳作为唯一ID
+                text: text
+            };
+            todos.push(newTodo);
+            todoInput.value = '';
+            renderTodos();
+        }
+
+        // 删除待办（暴露到全局，供 onclick 调用）
+        window.deleteTodo = function(id) {
+            todos = todos.filter(todo => todo.id !== id);
+            renderTodos();
+        }
+
+        // 绑定事件
+        addBtn.addEventListener('click', addTodo);
+        todoInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addTodo();
+        });
+
+        // 初始化渲染
+        renderTodos();
+    </script>
+</body>
+</html>
